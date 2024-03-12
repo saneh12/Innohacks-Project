@@ -8,7 +8,7 @@ import joblib
 app = Flask(_name_)
 CORS(app)
 
-model = joblib.load('application\model\model.joblib')
+model = joblib.load('model\model.joblib')
 @app.route('/')
 def hello_world():
     return render_template("index.html")
