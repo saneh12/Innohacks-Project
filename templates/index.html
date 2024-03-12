@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="utf-8">  
+<title>Language Translator</title>
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css')}}">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
+<script type="text/javascript" src="../static/countries.js"></script>
+<script type="text/javascript" src="../static/script.js"></script>
+</head>
+<body>
+<div class="body">
+    <div class="container">
+        <div class="wrapper">
+            <div class="text-input">
+                <form action="" id="translation-form" method="POST">
+                    <textarea spellcheck="false" id="from-text" name="from_text" placeholder="Enter text"></textarea>
+                    <textarea spellcheck="false" id="to-text" name="to_text" placeholder="Translation">{{ data  }}</textarea>
+                    <select id="from_language" name="from_language"></select>
+                    <select id = "to_language" name="to_language"></select>
+                    <button type="submit" class="translate">Translate Text</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
