@@ -5,10 +5,10 @@ from flask_cors import CORS
 from transformers import MBartForConditionalGeneration,MBart50TokenizerFast
 import torch
 import joblib
-app = Flask(__name__)
+app = Flask(_name_)
 CORS(app)
 
-model = MBartForConditionalGeneration.from_pretrained("facebook/mbart-large-50-many-to-many-mmt")
+model = joblib.load('application\model\model.joblib')
 @app.route('/')
 def hello_world():
     return render_template("index.html")
@@ -22,15 +22,16 @@ def index():
         to_lang = request.form.get('to_language')
 
         tokenizer=MBart50TokenizerFast.from_pretrained('facebook/mbart-large-50-many-to-many-mmt')
-        print("check 1")
+        
         tokenizer.src_lang=from_lang
-        print("check 2")
-        encoded_ar = tokenizer(from_text,return_tensors="pt",add_special_tokens=True,lang=from_lang)
-        print("check 3")
+        
+        print(from_text)
+        encoded_ar = tokenizer(from_text,return_tensors="pt",add_special_tokens=True)
+        
         generated_tokens=model.generate(**encoded_ar,
-                                        forced_bos_token_id=tokenizer.get_lang_id(to_lang))
+                                        forced_bos_token_id=tokenizer.lang_code_to_id[to_lang])
         data = tokenizer.batch_decode(generated_tokens,skip_special_tokens=True)
-        return render_template('index.html',data)
+        return render_template('index.html',data=data[0])
     return render_template('index.html')   
-if __name__ == '_main_':
-    app.run(port=4000)
+if _name_ == '_main_':
+    app.run(port=4000,debug=True)
