@@ -8,7 +8,7 @@ import joblib
 app = Flask(_name_)
 CORS(app)
 
-model = joblib.load('model\model.joblib')
+model = MBartForConditionalGeneration.from_pretrained("facebook/mbart-large-50-many-to-many-mmt")
 @app.route('/')
 def hello_world():
     return render_template("index.html")
