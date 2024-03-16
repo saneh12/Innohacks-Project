@@ -1,4 +1,5 @@
 Flask
+Gunicorn
 CORS
 torch
 transformers
