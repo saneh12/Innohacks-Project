@@ -1,0 +1,4 @@
+Flask
+CORS
+torch
+transformers
